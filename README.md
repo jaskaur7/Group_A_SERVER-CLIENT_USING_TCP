@@ -1,2 +1,2 @@
 # Group_A_SERVER/CLIENT_USING_TCP
-# Group Members: Jaspreet Kaur, Hitin Sarin, Saksham Mal, Prerit Sikerwal
+## Group Members: Jaspreet Kaur, Hitin Sarin, Saksham Mal, Prerit Sikerwal
