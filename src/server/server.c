@@ -1,14 +1,14 @@
 /**
 * \fn: int main(int argc, char **argv)
 *
-* \brief: This is the main function where other functions will be call.
+* \brief: This is the main function where other functions will be called.
 *
 * The function takes two arguments argc and argv arguments. The argc tells the number of arguments and argv tells the list of arguments. 
 *
 * @param[in] int argc: Integer input for count of the arguments. 
 * @param[in] char **argv: Character type pointer which points to list of passed values.
 *
-* \return: -1 if the socket bind is failed and 0 for success.
+* \return: 0 for success or -1 for failure.
 *
 */ 
 
@@ -32,27 +32,27 @@ int main(int argc, char **argv){
 	BindCreatedSocket(sockfd, port);
 	printf("bind done\n");
 
-    if((listen(sockfd, 3))<0){
-    	err_msg_die("listen failed.");
-    } 
+  	if((listen(sockfd, 3))<0){
+    		err_msg_die("listen failed.");
+    	} 
 
-    /*Accept connection */
-    while(1){
-        printf("\nWaiting for connection\n");
-        fflush(stdout);
-        c = sizeof(struct sockaddr_in);
-        confd = accept(sockfd, (struct sockaddr*)&client, (socklen_t*)&c); 
-        if (confd < 0){
+    	/*Accept connection */
+    	while(1){
+        	printf("\nWaiting for connection\n");
+        	fflush(stdout);
+        	c = sizeof(struct sockaddr_in);
+        	confd = accept(sockfd, (struct sockaddr*)&client, (socklen_t*)&c); 
+        	if (confd < 0){
 		    err_msg_die("accept failed");
-	    }
-        printf("\nConnection accepted\n");
-        if ((recv(confd , recvBuff , MAXLINE-1, 0 )) < 0){
-        	err_msg_die("read error.");
-    	}
+	    	}
+        	printf("\nConnection accepted\n");
+        	if ((recv(confd , recvBuff , MAXLINE-1, 0 )) < 0){
+        		err_msg_die("read error.");
+    		}
 
-	send(confd, recvBuff, strlen(recvBuff),0); 
-    close(confd);
-    }
+		send(confd, recvBuff, strlen(recvBuff),0); 
+    		close(confd);
+    	}
     
 	close(sockfd);
 	return 0;
