@@ -25,9 +25,9 @@ Once the connection is built between client and server, we will focus on transfe
 
 6.	src: It has following .c files:
 6.1. Server
-	(a) Server.c
+(a) Server.c
 6.2. Client
-	(a) Client.c
+(a) Client.c
 
 7.	test
 
