@@ -30,9 +30,6 @@ short socket_create(int af_net, int sock_strem){
 }
 
 
-
-
-
 /**
 * \fn: int bind_created_socket (int hSocket, int port)
 *

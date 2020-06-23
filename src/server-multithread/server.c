@@ -1,7 +1,5 @@
-
-#include <pthread.h>
 #include "../../include/queue.h"
-#include "../../include/common.h"
+#include "../../include/server_multi.h"
 
 /*Declare global variables*/
 pthread_mutex_t mutex;
@@ -17,7 +15,7 @@ struct inputVal {
 
 
 /**
-* \fn: int socket_create(int af_net, int sock_strem, 0)
+* \fn: int socket_create(void)
 *
 * \author: Hitin Sarin
 *
@@ -25,11 +23,7 @@ struct inputVal {
 *
 * The function takes two arguments af_net and sock_stream arguments. 
 *
-* @param[in] int domain: Type of Internet family used in the socket creation. (AF_INET)
-* @param[in] int type: Type of communication used in the socket creation within the above-mentioned domain (SOCK_STREAM)
-* @param[in] int protocol: It specifies the protocol used in the socket creation. (Default - 0)
-*
-* \return: integer value hsocket for success or -1 for failure.
+* \return: integer value hsocket for success.
 *
 */
 
@@ -37,15 +31,40 @@ short socket_create(void){
     short hSocket;
     printf("Create the socket\n");
     hSocket = socket(AF_INET, SOCK_STREAM, 0);
-	if (hSocket == -1){
-      err_msg_die("Could not create socket");
-    }
-    return hSocket;
+	return hSocket;
 }
 
 
 
 
+/**
+* \fn: int bind_created_socket (int hSocket, int port)
+*
+* \author: Jaspreet Kaur(jaskaur7)
+*
+* \brief: This function will bind the socket with the local protocol address.
+*
+* The function takes two arguments hsocket and port number. The hsocket will be created by the function SocketCreate() with AF_INET protocol address and SOCK_STREAM, which is a type of network socket or interprocess communication socket that provides connection-oriented services without any limit and organized mechanisms for opening and closing of the connection. 
+* The port number will either be entered manually while executing the program with '-p' followed by port number. The function will return 0 for success and -1 for any error. This function is for multithreading.
+*
+* @param[in] int hsocket: Socket descriptor of type integer. 
+* @param[in] int port: Port number of integer type.
+*
+* \return: -1 if the socket bind is failed and 0 for success.
+*
+*/
+
+int bind_created_socket(int hSocket, int port){
+    int iRetval=-1;
+    struct sockaddr_in  remote= {0};
+    /* Internet address family */
+    remote.sin_family = AF_INET;
+    /* Any incoming interface */
+    remote.sin_addr.s_addr = htonl(INADDR_ANY);
+    remote.sin_port = htons(port); /* Local port */
+    iRetval = bind(hSocket,(struct sockaddr *)&remote,sizeof(remote));
+    return iRetval;
+}
 
 
 
@@ -123,4 +142,4 @@ int main(int argc, char **argv) {
 
     close(socket_desc);
     return 0;
-}
+    }
