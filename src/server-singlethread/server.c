@@ -1,6 +1,18 @@
+/** @file server.c
+*
+* Contains the main function for single_thread_server.
+*
+*/
+
 #include "../../include/server_single.h"
 
-/**
+/**ain(int argc, char *argv[]){
+
+  char sendBuff[MAXLINE];
+  char recvBuff[MAXLINE];
+  struct sockaddr_in serv_addr;
+  int read_in, sockfd;
+  struct ad
 * \fn: int main(int argc, char **argv)
 *
 * \author: Jaspreet Kaur(jaskaur7)
@@ -18,36 +30,36 @@
 
 int main(int argc, char **argv) {
 
-  short sockfd;
-  int confd, port, c, bind;
-  struct sockaddr_in client;
-  char recvBuff[MAXLINE + 1];
+    short sockfd;
+    int confd, port, c, bind;
+    struct sockaddr_in client;
+    char recvBuff[MAXLINE + 1];
 
-  if(argc != 2){
-    err_msg_die("\n Usage: %s  (port number) \n",argv[0]);
-  }
+    if(argc != 2){
+      err_msg_die("\n Usage: %s  (port number) \n",argv[0]);
+    }
   
-  port = atoi(argv[1]);
-  /*Create socket */
-  sockfd = socket_create(AF_INET , SOCK_STREAM);
-  if (sockfd == -1){
-    return 1;
-  }
+    port = atoi(argv[1]);
+    /*Create socket */
+    sockfd = socket_create(AF_INET , SOCK_STREAM);
+    if (sockfd == -1){
+      return 1;
+    }
   
-  /*Bind */
-  bind = bind_created_socket(sockfd, port);
-  if (bind == -1){
-    return 1;
-  }
-  printf("bind done\n");
-
+    /*Bind */
+    bind = bind_created_socket(sockfd, port);
+    if (bind == -1){
+      return 1;
+    }
+    
+    printf("bind done\n");
+    
     if((listen(sockfd, 3))<0){
-    err_msg_die("listen failed.");
+      err_msg_die("listen failed.");
     } 
 
-     /*Accept connection */
-    while(1)
-    {
+    /*Accept connection */
+    while(1){
       printf("\nWaiting for connection to be accepted\n");
       fflush(stdout);
       c = sizeof(struct sockaddr_in);
@@ -58,9 +70,10 @@ int main(int argc, char **argv) {
       }
 
       printf("\none Connection accepted\n");
-      if ((recv(confd , recvBuff , MAXLINE-1, 0 )) < 0){
+      if((recv(confd , recvBuff , MAXLINE-1, 0 )) < 0){
         err_msg_die("read error.");
       } 
+      
       /*Send the recieved data back to clinet */
       send(confd, recvBuff, strlen(recvBuff),0); 
       close(confd);
