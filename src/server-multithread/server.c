@@ -1,4 +1,54 @@
 
+#include <pthread.h>
+#include "../../include/queue.h"
+#include "../../include/common.h"
+
+/*Declare global variables*/
+pthread_mutex_t mutex;
+pthread_cond_t cond;
+
+struct Queue* q;
+
+struct inputVal {
+  unsigned short port;
+  int no_of_threads;
+  int size_of_queue;
+};
+
+
+/**
+* \fn: int socket_create(int af_net, int sock_strem, 0)
+*
+* \author: Hitin Sarin
+*
+* \brief: This function will create a socket on the server end.
+*
+* The function takes two arguments af_net and sock_stream arguments. 
+*
+* @param[in] int domain: Type of Internet family used in the socket creation. (AF_INET)
+* @param[in] int type: Type of communication used in the socket creation within the above-mentioned domain (SOCK_STREAM)
+* @param[in] int protocol: It specifies the protocol used in the socket creation. (Default - 0)
+*
+* \return: integer value hsocket for success or -1 for failure.
+*
+*/
+
+short socket_create(void){
+    short hSocket;
+    printf("Create the socket\n");
+    hSocket = socket(AF_INET, SOCK_STREAM, 0);
+	if (hSocket == -1){
+      err_msg_die("Could not create socket");
+    }
+    return hSocket;
+}
+
+
+
+
+
+
+
 
 /**
 * \fn: int main(int argc, char *argv)
