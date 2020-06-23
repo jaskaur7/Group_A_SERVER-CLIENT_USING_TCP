@@ -59,10 +59,8 @@ int bind_created_socket(int hSocket, int port)
     printf("binding the created socket\n");
     iRetval = bind(hSocket,(struct sockaddr *)&remote,sizeof(remote));
     if (iRetval < 0){
-         
       /*print the error message*/
       err_msg_die("bind failed.");
-  
     }
     return iRetval;
 }
