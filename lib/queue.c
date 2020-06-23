@@ -1,3 +1,71 @@
+
+
+/**
+*\functions: struct Queue* createQueue(unsigned capacity) ,int isFull(struct Queue* queue),int isEmpty(struct Queue* queue)
+*
+*\author:Prerit Sikerwal
+*
+*\brief:C program for array implementation of queue.
+*
+*@param[in]:queue
+*
+*/
+
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <limits.h> 
+#include "../include/queue.h"
+
+/* A structure to represent a queue */ 
+struct Queue 
+{ 
+    int front, rear, size; 
+    unsigned capacity; 
+    int* array; 
+}; 
+  
+
+
+
+
+/* function to create a queue of given capacity */  
+/* It initializes size of queue as 0 */
+struct Queue* createQueue(unsigned capacity) 
+{ 
+    struct Queue* queue = (struct Queue*) malloc(sizeof(struct Queue)); 
+    queue->capacity = capacity;
+    queue->rear = capacity - 1;  
+    queue->front = queue->size = 0;  
+    queue->array = (int*) malloc(queue->capacity * sizeof(int)); 
+    return queue; 
+} 
+
+
+
+  
+/* Queue is full when size becomes equal to the capacity  */
+int isFull(struct Queue* queue) {
+    if (queue->size == queue->capacity){
+    return 1;
+    }
+    return 0; 
+} 
+
+
+  
+/* Queue is empty when size is 0 */
+int isEmpty(struct Queue* queue){  
+    if (queue->size == 0){
+    return 1;
+    }
+    return 0; 
+} 
+  
+
+
+
+
+
 /**
 * \function: void enqueue(struct Queue* queue, int item) 
 *
