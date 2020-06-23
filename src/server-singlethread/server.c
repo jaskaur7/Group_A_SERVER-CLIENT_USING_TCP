@@ -6,6 +6,7 @@
 
 #include "../../include/server_single.h"
 
+/**
 * \fn: int main(int argc, char **argv)
 *
 * \author: Jaspreet Kaur(jaskaur7)
