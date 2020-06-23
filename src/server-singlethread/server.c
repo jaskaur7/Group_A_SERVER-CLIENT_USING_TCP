@@ -6,13 +6,6 @@
 
 #include "../../include/server_single.h"
 
-/**ain(int argc, char *argv[]){
-
-  char sendBuff[MAXLINE];
-  char recvBuff[MAXLINE];
-  struct sockaddr_in serv_addr;
-  int read_in, sockfd;
-  struct ad
 * \fn: int main(int argc, char **argv)
 *
 * \author: Jaspreet Kaur(jaskaur7)
