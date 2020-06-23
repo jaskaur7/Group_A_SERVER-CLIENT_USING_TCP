@@ -7,6 +7,30 @@
 #include "common.h"
 
 /**
+* \function: short socket_create(int af_net, int sock_strem)
+*
+* \autor: Saksham Mal
+*
+* \brief:  The function is used to create a socket and once it is created it has to specify the domain and type of socket. The function returns an entry as small integer into file descriptor table and it  
+*          returns -1 if it could not create socket.
+*
+* @param[in] domain It is the address domain of the socket. 
+* @param[in] type It is the type of the socket provided. Here TCP which is a stream socket is used as it can communicate as a continuous stream of characters and is reliable.
+*
+*/
+
+short socket_create(int af_net, int sock_strem){
+    short hSocket;
+    printf("Create the socket\n");
+    hSocket = socket(af_net, sock_strem, 0);
+    if (hSocket == -1){
+      err_msg_die("Could not create socket");
+    }
+    return hSocket;
+}
+
+
+/**
 * \fn: int bind_created_socket (int hSocket, int port)
 *
 * \author: Jaspreet Kaur(jaskaur7)
