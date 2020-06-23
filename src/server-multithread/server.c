@@ -70,6 +70,93 @@ int bind_created_socket(int hSocket, int port){
 
 
 /**
+* \function: void queue_add(int value),int getQueue()
+*
+* \autor: Saksham Mal
+*
+* \brief:  The functions which locks the queue, fetches if the client connection is present in the queue in order to establish the connection and if got the element it passes it back and unlocks  the queue again.
+*
+* @param[in]  Queue It is used to fetch the client connections.
+* @param[in]  int   The integer value of pthread_mutex must be initialised.
+*
+* return: integer value for waiting connection error and adding queue.
+*
+*/
+
+void queue_add(int value){
+    /*Locks the mutex*/
+    pthread_mutex_lock(&mutex);
+
+    enqueue(q, value);
+
+    /*Unlocks the mutex*/
+    pthread_mutex_unlock(&mutex);
+
+    /* Signal waiting threads */
+    pthread_cond_signal(&cond);
+}
+
+int getQueue(){
+    /*Locks the mutex*/
+    pthread_mutex_lock(&mutex);
+
+    /*Wait for element to become available*/
+    while(isEmpty(q) == 1){
+        printf("Thread %lu: \tWaiting for Connection\n", pthread_self());
+        if(pthread_cond_wait(&cond, &mutex) != 0){
+            err_msg_die("Cond Wait Error");
+        }
+    }
+
+    /*We got an element, pass it back and unblock*/
+    int val = front(q);
+    dequeue(q);
+
+    /*Unlocks the mutex*/
+    pthread_mutex_unlock(&mutex);
+
+    return val;
+}
+
+/**
+* \function: static void* connectionHandler()
+*
+* \autor: Saksham Mal
+*
+* \brief: It is assigned to each thread while we are spawning the multiple threads that is thread pool. It takes care of the work which clients wants to do while making a request to the server.  
+*         The function calls getqueue function which locks the queue, fetches if the client connection is present in the queue and unlocks the queue again. If client connection is present in the queue it calls the client  processing function which processes the client requests.
+*
+* @param[in] Queue The queue is “First-In,First-Out” data structure implemented to fetch the client connections (connectionHandler function, getQueue function) 
+* @param[in] int The integer containing the connection status of the client (clientProcessing). 
+* @param[in] pthread_mutex_t This is used to lock a shared data structure among the thread. 
+*
+*
+* return: integer value of -1 if failed to recieve data from client.
+*
+*/
+
+static void* connectionHandler(){
+    /*Wait until tasks is available*/
+    while(1){
+        int connfd = getQueue(q);
+        if (connfd == -1){
+            break;
+        }
+        printf("Handler %lu: Processing :", pthread_self());
+        /*Execute*/
+        int client_proc = clientProcessing(connfd);
+        if (client_proc == -1){
+            break;
+        }
+
+    }
+}
+
+
+
+
+
+/**
 * \fn: int main(int argc, char *argv)
 * 
 * \author: Hitin Sarin
