@@ -1,7 +1,15 @@
-#include<common.h>
+/** @file server_single.h
+  */
+#ifndef _SERVER_SINGLE_H_
+#define _SERVER_SINGLE_H_
+
+/* Including all Dependencies */
+#include "common.h"
 
 /**
-* \fn: int BindCreatedSocket (int hSocket, int port)
+* \fn: int bind_created_socket (int hSocket, int port)
+*
+* \author: Jaspreet Kaur(jaskaur7)
 *
 * \brief: This function will bind the socket with the local protocol address.
 *
@@ -13,10 +21,9 @@
 *
 * \return: -1 if the socket bind is failed and 0 for success.
 *
-*/ 
+*/
 
-
-int BindCreatedSocket(int hSocket, int port)
+int bind_created_socket(int hSocket, int port)
 {
     int iRetval=-1;
     struct sockaddr_in  remote= {0};
@@ -25,11 +32,15 @@ int BindCreatedSocket(int hSocket, int port)
     /* Any incoming interface */
     remote.sin_addr.s_addr = htonl(INADDR_ANY);
     remote.sin_port = htons(port); /* Local port */
+    printf("binding the created socket\n");
     iRetval = bind(hSocket,(struct sockaddr *)&remote,sizeof(remote));
     if (iRetval < 0){
-      /* print the error message */
+         
+      /*print the error message*/
       err_msg_die("bind failed.");
+  
     }
     return iRetval;
 }
 
+#endif
