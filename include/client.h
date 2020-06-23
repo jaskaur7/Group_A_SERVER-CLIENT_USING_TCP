@@ -1,3 +1,11 @@
+/** @file client.h
+ *  @brief Function prototypes for Client end.
+ *
+ *  
+ * This function is used to provide get_sockaddr and open_connection function to the client's main function.
+ *
+ */
+
 #ifndef _CLIENT_H_
 #define _CLIENT_H_
 
@@ -87,5 +95,6 @@ int open_connection(struct addrinfo* addr_list){
 
   return sockfd;
 }
+
 #endif
 

@@ -1,3 +1,11 @@
+/** @file server_multi.h
+ *  @brief Function prototypes for Multi-thread Server.
+ *
+ *  
+ * This function is used to provide clientProcessing function to the multi-thread server main function.
+ *
+ */
+
 #ifndef _SERVER_MULTI_H_
 #define _SERVER_MULTI_H_
 
