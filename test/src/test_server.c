@@ -29,6 +29,78 @@ static int tests_passed;
 
 
 
+/**
+* \fn: void TestStart(char *name)
+*
+* \author: Hitin Sarin
+*
+* \brief: This is the utility function for starting testing of our functions
+*
+*/ 
+
+void TestStart(char *name)
+{
+    num_tests++;
+    rslt = 1;
+    printf("-- Testing %s ... ",name);
+}
+
+
+/**
+* \fn: void TestEnd()
+*
+* \author: Hitin Sarin
+*
+* \brief: This is the utility function for ending testing of our functions
+*
+*/ 
+
+void TestEnd()
+{
+    if (rslt) tests_passed++;
+    printf("%s\n", rslt ? "success" : "fail");
+}
+
+
+/* Test Case For Socket_Creation */
+
+/**
+* \fn: int test_normal_socket_create(int af_net, int sock_stream)
+*
+* \author: Hitin Sarin
+*
+* \brief: This is the test function where we will test the socket_creation which was implemented in the Assignment.
+*
+* The function takes the below arguments and shows when all the correct argument are given, the test passes stating the "Socket is Created". When in the main function  int sockfd = test_normal_socket_create(AF_INET , SOCK_STREAM); is called it passes successfully.
+*
+* @param[in] domain: Type of Internet family used in the socket creation. (AF_INET)
+* @param[in] type: Type of communication used in the socket creation within the above-mentioned domain. (SOCK_STREAM)
+* @param[in] protocol: It specifies the protocol used in the socket creation. (Default=0)
+*
+* \return User_Type: non-zero value for success or -1 for failure.
+*
+*/ 
+
+
+int test_normal_socket_create(int af_net, int sock_stream){
+    int jmp_rval;
+    int sockfd;
+
+    TestStart("test_normal_socket_create");
+    should_exit = 0;
+    if (!(jmp_rval=setjmp(jump_env))){
+        sockfd = socket_create(af_net, sock_stream);
+    }
+
+    assert(jmp_rval==0);
+    assert(sockfd!=-1);
+    TestEnd();
+    return sockfd;
+}
+
+
+
+
 
 
 
@@ -110,11 +182,17 @@ int main(int argc, char *argv[])
     num_tests = 0;
     tests_passed = 0;
     done = 0;
+
     /*Create socket */
     int sockfd_ = test_normal_socket_create(5 , 6);
     int sockfd = test_normal_socket_create(AF_INET , SOCK_STREAM);
+
+    /*Bind*/
     test_bind_created_socket(sockfd, 8000);
+
+    /*clientProcessing*/
     test_clientProcessing(0);
+
     printf("Total tests passed: %d\n", tests_passed);
     printf("Total tests faile: %d\n", num_tests - tests_passed);
     done = 1;
