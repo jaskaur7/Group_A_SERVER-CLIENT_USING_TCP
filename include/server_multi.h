@@ -15,7 +15,7 @@
 /**
 * \function: int clientProcessing (int connfd)
 *
-* \autor: Saksham Mal
+* \authsor: Saksham Mal
 *
 * \brief:  The server receives data from the client, read the string and gives it back to the client and then closes the connection.
 *
