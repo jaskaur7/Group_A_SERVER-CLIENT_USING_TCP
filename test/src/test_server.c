@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <setjmp.h>
 #include "../../include/server_single.h"
-#include "../../include/server-multi.h"
+#include "../../include/server_multi.h"
 #include "../../include/common.h"
 
 // redefine assert to set a boolean flag
