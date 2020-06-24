@@ -13,7 +13,7 @@ The client and server will pair where server simply echoes the message or instru
 
 # Installation
 
-For installation, steps should be followed from [Installation_File.pdf](https://github.com/jaskaur7/Group_A_SERVER-CLIENT_USING_TCP/blob/master/doc/installation_file.pdf)
+For installation, steps should be followed from [installation_file.pdf](https://github.com/jaskaur7/Group_A_SERVER-CLIENT_USING_TCP/blob/master/doc/installation_file.pdf)
 
 # Usage
 
@@ -25,31 +25,31 @@ For successful run, then you can follow instructions mentioned in [user_manual.d
 2.	build: This folder has all the object files generated using makefile. 
 
 3.	doc: It consists of all the documents for this project.
-3.1	user_manual
-3.2	installation_file
-3.3
+<br />3.1	user_manual.pdf
+<br />3.2	installation_file.pdf
+<br />3.3	developer_manual.pdf
 
 4.	include: It has the essential header files to run this project.
 
 5.	lib: It contains the file for implementing the queue.
-5.1.	queue.c
+<br />5.1.	queue.c
 
 6.	src: It has following .c files:
-6.1.	server-singlethread
-	a)	server.c
-6.2.	server-multithread
-	a)	server.c
-6.3.	client
-	a)	client.c
+<br />6.1.	server-singlethread
+<br />	a)	server.c
+<br />6.2.	server-multithread
+<br />	a)	server.c
+<br />6.3.	client
+<br />	a)	client.c
 
 6.	test: It has the files for different test case scenarios.
-6.1.	src
-	a)	test_client.c
-	b)	test_server.c
+<br />6.1.	src
+<br />	a)	test_client.c
+<br />	b)	test_server.c
 
 # For Developers
 
-Developer manual is available [here]()
+Developer manual and Software Design is available [here](https://github.com/jaskaur7/Group_A_SERVER-CLIENT_USING_TCP/blob/master/doc/developer_manual_and_software_design.pdf)
 
 # License
 
