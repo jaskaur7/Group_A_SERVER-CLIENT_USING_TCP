@@ -16,7 +16,7 @@ CC = gcc
 LIBS = -pthread
 
 $(shell mkdir -p bin)
-$(shell mkdir -p bin)
+$(shell mkdir -p build)
 
 all: client serverSingle serverMulti test_client test_server message
 
