@@ -1,0 +1,15 @@
+\hypertarget{server-singlethread_2server_8c}{}\doxysection{src/server-\/singlethread/server.c File Reference}
+\label{server-singlethread_2server_8c}\index{src/server-\/singlethread/server.c@{src/server-\/singlethread/server.c}}
+{\ttfamily \#include \char`\"{}../../include/server\+\_\+single.\+h\char`\"{}}\newline
+Include dependency graph for server.\+c\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{server-singlethread_2server_8c_a3c04138a5bfe5d72780bb7e82a18e627}\label{server-singlethread_2server_8c_a3c04138a5bfe5d72780bb7e82a18e627}} 
+int {\bfseries main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contains the main function for single\+\_\+thread\+\_\+server. 
